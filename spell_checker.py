@@ -19,27 +19,27 @@ vocabs = set(words)
 print(f"There are {len(vocabs)} unique words in the vocabulary")
 
 word_counts = Counter(words)
-print(word_counts["love"])
+# print(word_counts["love"])
 
 total_word_count = float(sum(word_counts.values()))
 word_probas = {word: word_counts[word] / total_word_count for word in word_counts.keys()}
 
-print(word_probas["love"])
+# print(word_probas["love"])
 
 def split(word):
   return [(word[:i], word[i:]) for i in range(len(word) + 1)]
 
-print(split("trash"))
+# print(split("trash"))
 
 def delete(word):
   return [l + r[1:] for l,r in split(word) if r]
 
-print(delete("trash"))
+# print(delete("trash"))
 
 def swap(word):
   return [l + r[1] + r[0] + r[2:] for l, r in split(word) if len(r)>1]
 
-print(swap("trash"))
+# print(swap("trash"))
 
 string.ascii_lowercase
 
@@ -47,23 +47,23 @@ def replace(word):
   letters = string.ascii_lowercase
   return [l + c + r[1:] for l, r in split(word) if r for c in letters]
 
-print(replace("trash"))
+# print(replace("trash"))
 
 def insert(word):
   letters = string.ascii_lowercase
   return [l + c + r for l, r in split(word) for c in letters]
 
-print(insert("trash"))
+# print(insert("trash"))
 
 def edit1(word):
   return set(delete(word) + swap(word) + replace(word) + insert(word))
 
-print(edit1("trash"))
+# print(edit1("trash"))
 
 def edit2(word):
   return set(e2 for e1 in edit1(word) for e2 in edit1(e1))
 
-print(edit2("trash"))
+# print(edit2("trash"))
 
 def correct_spelling(word, vocabulary, word_probabilities):
   if word in vocabulary:
@@ -74,8 +74,8 @@ def correct_spelling(word, vocabulary, word_probabilities):
   best_guesses = [w for w in suggestions if w in vocabulary]
   return [(w, word_probabilities[w]) for w in best_guesses]
 
-word = "mire"
-corrections = correct_spelling(word, vocabs, word_probas)
+# word = "mire"
+# corrections = correct_spelling(word, vocabs, word_probas)
 
 if corrections:
   print(corrections)
@@ -118,5 +118,5 @@ class SpellChecker(object):
 
 checker = SpellChecker("./big.txt")
 
-checker.check("mire")
+# checker.check("mire")
 
