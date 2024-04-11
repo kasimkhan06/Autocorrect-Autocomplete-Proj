@@ -75,7 +75,7 @@ def correct_spelling(word, vocabulary, word_probabilities):
   return [(w, word_probabilities[w]) for w in best_guesses]
 
 # word = "mire"
-# corrections = correct_spelling(word, vocabs, word_probas)
+corrections = correct_spelling(word, vocabs, word_probas)
 
 if corrections:
   print(corrections)
