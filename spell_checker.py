@@ -75,14 +75,14 @@ def correct_spelling(word, vocabulary, word_probabilities):
   return [(w, word_probabilities[w]) for w in best_guesses]
 
 # word = "mire"
-corrections = correct_spelling(word, vocabs, word_probas)
+# corrections = correct_spelling(word, vocabs, word_probas)
 
-if corrections:
-  print(corrections)
-  probs = np.array([c[1] for c in corrections])
-  best_ix = np.argmax(probs)
-  correct = corrections[best_ix][0]
-  print(f"{correct} is suggested for {word}")
+# if corrections:
+#   print(corrections)
+#   probs = np.array([c[1] for c in corrections])
+#   best_ix = np.argmax(probs)
+#   correct = corrections[best_ix][0]
+#   print(f"{correct} is suggested for {word}")
 
 class SpellChecker(object):
 
