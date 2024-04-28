@@ -43,7 +43,7 @@ class Autocomplete:
 
     def __init__(self):
         # Initialize trie, word_occ, and word_prob
-        self.trie = None
+        self.trie = Trie() 
         self.word_occurrences = None
         self.word_probabilities = None
 
