@@ -1,20 +1,42 @@
 import os
-from flask import Flask, render_template, request, jsonify
 from spell_checker import SpellChecker
+from flask import Flask, render_template, request, jsonify
+from autocomplete import Autocomplete,Trie, TrieNode  # Import Autocomplete class
 
 app = Flask(__name__)
-checker = SpellChecker("./big.txt")
+
+autocomplete = Autocomplete()  # Initialize Autocomplete
+checker = SpellChecker("./gutenberg_corpus.txt") # Initialize SpellChecker
 
 @app.route('/')  
 def index():
     return render_template('index.html')
 
-@app.route('/spellcheck', methods=['POST'])
-def spellcheck():
+@app.route('/autocomplete')
+def autocomplete_page():
+    return render_template('autocomplete.html')
+
+@app.route('/spellchecker')
+def spellchecker_page():
+    return render_template('spellchecker.html')
+
+
+@app.route('/autocomplete/suggest', methods=['POST'])
+def suggest_autocomplete():
+    data = request.get_json()
+    prefix = data.get('prefix')
+    if not prefix:
+        return jsonify({'ERROR': 'No prefix provided'}), 400
+    
+    suggestions = autocomplete.suggestWord(prefix)
+    return jsonify({'suggestions': suggestions})
+
+@app.route('/spellchecker/check', methods=['POST'])
+def check_spellchecker():
     data = request.get_json()
     word = data.get('word')
     if not word:
-        return jsonify({'error': 'Word not provided'}), 400
+        return jsonify({'corrections': []})
     
     corrections = checker.check(word)
     return jsonify({'corrections': corrections})

@@ -1,54 +1,55 @@
-body {
-    font-family: Arial, sans-serif;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
 }
 
-.container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #cfc9c9;
 }
+ */
+
+
+ body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Light gray background */
+    color: #333; /* Dark gray text */
+}
+
 
 h1 {
-    text-align: center;
-    color: #333;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #132c47; /* Blue heading color */
+    margin-bottom: 30px;
 }
 
-.input-container {
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
     margin-bottom: 20px;
 }
 
-input[type="text"] {
-    width: calc(100% - 90px);
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+ul {
+    margin-bottom: 20px;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+li {
+    font-size: 1.2rem;
+    line-height: 1.6;
 }
 
-button:hover {
-    background-color: #0056b3;
+.footer {
+    background-color: #343a40; /* Dark background color */
+    color: #fff; /* Light text color */
+    padding: 10px 0; /* Padding for top and bottom */
+    text-align: center; /* Center-align text */
 }
 
-#corrections {
-    margin-top: 20px;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
+.footer a {
+    color: #fff; /* Light text color for links */
+    text-decoration: none; /* Remove underline from links */
 }
-
-#corrections p {
-    margin: 5px 0;
-}
-
