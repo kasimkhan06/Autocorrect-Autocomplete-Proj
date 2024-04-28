@@ -1,19 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spell Checker</title>
+    <title>Spell Checker with Autocomplete</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Spell Checker</h1>
+        <h1>Autocomplete</h1>
         <div class="input-container">
-            <input type="text" id="word" placeholder="Enter word to spell-check">
-            <button id="check-btn">Check Spelling</button>
+            <input type="text" id="autocomplete-prefix" placeholder="Enter prefix for autocomplete">
+            <div id="autocomplete-suggestions"></div>
         </div>
-        <div id="corrections"></div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
     const wordInput = document.getElementById('word');
-    const checkBtn = document.getElementById('check-btn');
-    const correctionsDiv = document.getElementById('corrections');
+    const autocompletePrefixInput = document.getElementById('autocomplete-prefix'); // New line
+    const autocompleteSuggestionsDiv = document.getElementById('autocomplete-suggestions'); // New line
 
-    checkBtn.addEventListener('click', function () {
-        const word = wordInput.value.trim();
-        if (word === '') {
-            alert('Please enter a word to spell-check.');
+    autocompletePrefixInput.addEventListener('input', function () { // New event listener for input change
+        const prefix = autocompletePrefixInput.value.trim();
+        if (prefix === '') {
+            autocompleteSuggestionsDiv.innerHTML = '';
             return;
         }
 
-        fetch('/spellcheck', {
+        fetch('/autocomplete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ word: word })
+            body: JSON.stringify({ prefix: prefix })
         })
         .then(response => {
             if (!response.ok) {
@@ -24,43 +24,27 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(data => {
-            displayCorrections(data.corrections);
+            displayAutocompleteSuggestions(data.suggestions);
         })
         .catch(error => {
-            console.error('Error fetching data:', error);
-            alert('An error occurred while spell-checking the word.');
+            console.error('Error fetching autocomplete data:', error);
+            autocompleteSuggestionsDiv.innerHTML = '<p>An error occurred while fetching autocomplete suggestions.</p>';
         });
     });
 
-    // function displayCorrections(corrections) {
-    //     correctionsDiv.innerHTML = '';
-    //     if (corrections.length === 0) {
-    //         correctionsDiv.innerHTML = '<p>No corrections found.</p>';
-    //         return;
-    //     }
-    //     const ul = document.createElement('ul');
-    //     corrections.forEach(correction => {
-    //         const li = document.createElement('li');
-    //         li.textContent = `${correction[0]} (Probability: ${correction[1].toFixed(4)})`;
-    //         ul.appendChild(li);
-    //     });
-    //     correctionsDiv.appendChild(ul);
-    // }
 
-    function displayCorrections(corrections) {
-        correctionsDiv.innerHTML = '';
-        if (corrections.length === 0) {
-            correctionsDiv.innerHTML = '<p>No corrections found.</p>';
+    function displayAutocompleteSuggestions(suggestions) {
+        autocompleteSuggestionsDiv.innerHTML = '';
+        if (suggestions.length === 0) {
+            autocompleteSuggestionsDiv.innerHTML = '<p>No autocomplete suggestions found.</p>';
             return;
         }
         const ul = document.createElement('ul');
-        corrections.forEach(correction => {
+        suggestions.forEach(suggestion => {
             const li = document.createElement('li');
-            const probability = Number(correction[1]).toFixed(10); // Format probability to 10 decimal places
-            li.textContent = `${correction[0]} (Probability: ${probability})`;
+            li.textContent = suggestion;
             ul.appendChild(li);
         });
-        correctionsDiv.appendChild(ul);
+        autocompleteSuggestionsDiv.appendChild(ul);
     }
-    
 });

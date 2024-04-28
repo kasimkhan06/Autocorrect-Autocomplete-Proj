@@ -12,7 +12,7 @@ def read_corpus(filename):
 
   return words
 
-words = read_corpus("./big.txt")
+words = read_corpus("./gutenberg_corpus.txt")
 print(f"There are {len(words)} total words in the corpus")
 
 vocabs = set(words)
@@ -116,7 +116,7 @@ class SpellChecker(object):
     valid_candidates = [w for w in candidates if w in self.vocabs]
     return sorted([(c, self.word_probas[c]) for c in valid_candidates], key=lambda tup: tup[1], reverse=True)
 
-checker = SpellChecker("./big.txt")
+checker = SpellChecker("./gutenberg_corpus.txt")
 
 # checker.check("mire")
 
