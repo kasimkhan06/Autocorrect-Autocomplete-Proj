@@ -1,9 +1,7 @@
 import pickle
 from collections import defaultdict
-import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-import string
 
 class TrieNode:
     def __init__(self):

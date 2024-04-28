@@ -1,1 +1,1 @@
-web: gunicorn --preload -w 4 -b 0.0.0.0:$PORT app:app
+web: python-3.9.19
