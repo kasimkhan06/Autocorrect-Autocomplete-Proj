@@ -1,15 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const wordInput = document.getElementById('word');
     const autocompletePrefixInput = document.getElementById('autocomplete-prefix'); // New line
     const autocompleteSuggestionsDiv = document.getElementById('autocomplete-suggestions'); // New line
 
-    autocompletePrefixInput.addEventListener('input', function () { // New event listener for input change
+    autocompletePrefixInput.addEventListener('input', function () {
         const prefix = autocompletePrefixInput.value.trim();
         if (prefix === '') {
             autocompleteSuggestionsDiv.innerHTML = '';
             return;
         }
-
+        
         fetch('/autocomplete', {
             method: 'POST',
             headers: {
@@ -18,13 +17,13 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify({ prefix: prefix })
         })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            //console log 
+            console.log(response);
             return response.json();
         })
         .then(data => {
-            displayAutocompleteSuggestions(data.suggestions);
+            console.log(data);
+            displayAutocompleteSuggestion(data.suggestion);
         })
         .catch(error => {
             console.error('Error fetching autocomplete data:', error);
@@ -32,19 +31,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-
-    function displayAutocompleteSuggestions(suggestions) {
+    function displayAutocompleteSuggestion(suggestion) {
         autocompleteSuggestionsDiv.innerHTML = '';
-        if (suggestions.length === 0) {
-            autocompleteSuggestionsDiv.innerHTML = '<p>No autocomplete suggestions found.</p>';
+        if (!suggestion) {
+            autocompleteSuggestionsDiv.innerHTML = '<p>No autocomplete suggestion found.</p>';
             return;
         }
-        const ul = document.createElement('ul');
-        suggestions.forEach(suggestion => {
-            const li = document.createElement('li');
-            li.textContent = suggestion;
-            ul.appendChild(li);
-        });
-        autocompleteSuggestionsDiv.appendChild(ul);
+        const p = document.createElement('p');
+        p.textContent = suggestion;
+        autocompleteSuggestionsDiv.appendChild(p);
     }
+    
 });

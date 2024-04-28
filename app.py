@@ -43,8 +43,8 @@ def autocomplete_handler():  # Renamed the function
     if not prefix:
         return jsonify({'error': 'Prefix not provided'}), 400
     
-    suggestions = autocomplete_instance.suggestWord(prefix)  # Use the instance method
-    return jsonify({'suggestions': suggestions})
+    suggestion = autocomplete_instance.suggestWord(prefix)  # Use the instance method
+    return jsonify({'suggestion': suggestion}) # Return suggestion instead of corrections
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
