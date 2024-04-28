@@ -69,6 +69,3 @@ class Autocomplete:
             suggested_word = "No Suggestions"
         
         return suggested_word
-
-model = Autocomplete()
-model.suggestWord('lu')
