@@ -68,3 +68,6 @@ class Autocomplete:
         else :
             suggested_word = "No Suggestions"
         print(suggested_word)
+
+model = Autocomplete()
+model.suggestWord('lu')
