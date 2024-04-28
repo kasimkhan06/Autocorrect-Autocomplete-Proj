@@ -5,7 +5,7 @@ from spell_checker import SpellChecker
 app = Flask(__name__)
 checker = SpellChecker("./big.txt")
 
-@app.route('/')
+@app.route('/')  
 def index():
     return render_template('index.html')
 
