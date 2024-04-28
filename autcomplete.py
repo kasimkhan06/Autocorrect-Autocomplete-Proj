@@ -67,7 +67,7 @@ class Autocomplete:
             suggested_word = sorted_suggested_words[0][0]
         else :
             suggested_word = "No Suggestions"
-        print(suggested_word)
+        return suggested_word
 
 model = Autocomplete()
 model.suggestWord('lu')
