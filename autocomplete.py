@@ -62,8 +62,8 @@ class Autocomplete:
 
         sorted_suggested_words = sorted(suggestions_probability.items(), key=lambda x: x[1], reverse=True)
         if sorted_suggested_words:
-            suggested_word = sorted_suggested_words[0][0]
+            suggested_words = sorted_suggested_words
         else :
-            suggested_word = "No Suggestions"
+            suggested_words = []
         
-        return suggested_word
+        return suggested_words
